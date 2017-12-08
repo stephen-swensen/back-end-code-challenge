@@ -12,16 +12,15 @@
 ;; Answer: 4613732
 ;; Explanation:
 ;;  1) we define a function `fib` which returns the nth Fibonacci number using the standard recursive definition
-;;  2) we bind `fibs` to an infinite, lazy sequence of Fibonacci numbers that we generate by mapping
-;;     the elements of `(range)` using our `fib` implementation. n.b. this is not very efficient at all because
-;;     `fib` was not implemented with any kind of memoization, so we repeat term calculations over and over again.
+;;  2) we bind `fibs` to an infinite, lazy sequence of Fibonacci numbers that we generate by apply `fib` to
+;;     elements of `(range)` using `map`. n.b. this is not very efficient at all because `fib` was not implemented
+;;     with any kind of memoization, so we repeat term calculations over and over again.
 ;;  3) now we can easily pipe `fibs` into `take-while`, `filter`, and `reduce` to get our answer.
 (defn fib [n]
   (cond
-    (= n 1) 1
-    (= n 2) 2
+    (<= n 2) n
     :else (+ (fib (- n 1)) (fib (- n 2)))))
-(let [fibs (map (fn [i] (fib (+ i 1))) (range))]
+(let [fibs (map fib (range))]
   (->> fibs
        (take-while (fn [x] (< x 4000000)))
        (filter even?)

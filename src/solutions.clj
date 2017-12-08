@@ -12,7 +12,7 @@
 ;; Answer: 4613732
 ;; Explanation:
 ;;  1) we define a function `fib` which returns the nth Fibonacci number using the standard recursive definition
-;;  2) we bind `fibs` to an infinite, lazy sequence of Fibonacci numbers that we generate by apply `fib` to
+;;  2) we bind `fibs` to an infinite, lazy sequence of Fibonacci numbers that we generate by applying `fib` to
 ;;     elements of `(range)` using `map`. n.b. this is not very efficient at all because `fib` was not implemented
 ;;     with any kind of memoization, so we repeat term calculations over and over again.
 ;;  3) now we can easily pipe `fibs` into `take-while`, `filter`, and `reduce` to get our answer.

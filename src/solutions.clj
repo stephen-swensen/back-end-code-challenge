@@ -17,18 +17,16 @@
 ;;     the elements of the infinite, lazy sequence `(range)` with our `fib` implementation. n.b. this is not
 ;;     very efficient at all because `fib` was not implemented with any kind of memoization, so we repeat
 ;;     term calculations over and over again.
-;;  3) now we can easily apply `take-while`, `filter`, and `reduce` to `fibs` to get our answer
+;;  3) now we can easily apply `take-while`, `filter`, and `reduce` to `fibs` to get our answer. We use the `->>`
+;;     macro to give pipeline syntax similar to F#'s `|>` operator
 (defn fib [n]
   (cond
     (= n 1) 1
     (= n 2) 2
     :else (+ (fib (- n 1)) (fib (- n 2)))))
-(def fibs (map (fn [i] (fib (+ i 1))) (range)))
-(reduce
-  +
-  (filter
-    even?
-    (take-while
-      (fn [x] (< x 4000000))
-      fibs)))
+(let [fibs (map (fn [i] (fib (+ i 1))) (range))]
+  (->> fibs
+       (take-while (fn [x] (< x 4000000)))
+       (filter even?)
+       (reduce +)))
 

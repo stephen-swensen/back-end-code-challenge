@@ -26,6 +26,18 @@
        (filter even?)
        (reduce +)))
 
+;; Problem(4): Find the largest palindrome made from the product of two 3-digit numbers.
+;; Answer: 906609
+;; Explanation:
+;;  1) define `palindrome? [n]` function which compares n as string to n as string reversed
+;;  2) we generate a list of all 3-digit number products, then filter for palindromes and
+;;     take the max
+(defn palindrome? [n]
+  (= (str n) (->> n str reverse (apply str))))
+(->> (for [x (range 100 1000) y (range 100 1000)] (* x y))
+     (filter palindrome?)
+     (apply max))
+
 ;; Problem(7): What is the 1001st prime number?
 ;; Answer: 104743
 ;; Explanation:

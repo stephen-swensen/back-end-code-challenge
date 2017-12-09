@@ -17,9 +17,9 @@
 ;;     with any kind of memoization, so we repeat term calculations over and over again.
 ;;  3) now we can easily pipe `fibs` into `take-while`, `filter`, and `reduce` to get our answer.
 (defn fib [n]
-  (cond
-    (<= n 2) n
-    :else (+ (fib (- n 1)) (fib (- n 2)))))
+  (if (<= n 2)
+    n
+    (+ (fib (- n 1)) (fib (- n 2)))))
 (let [fibs (map fib (range))]
   (->> fibs
        (take-while (fn [x] (< x 4000000)))

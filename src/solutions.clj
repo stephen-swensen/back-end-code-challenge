@@ -27,10 +27,11 @@
        (reduce +)))
 
 ;; Problem(7): What is the 1001st prime number?
-;; Answer:
+;; Answer: 104743
 ;; Explanation:
 ;;  1) we define the `prime? [n]` function which is implemented with an inner recursive function that checks
 ;;     the divisibility of `n` by the numbers 2 through the square root of n
+;;  2) we create a lazy, infinite sequence of primes and take the 10001th
 (use '[clojure.math.numeric-tower])
 (defn prime? [n]
   ((fn test [i]
@@ -38,5 +39,6 @@
        (> i (sqrt n)) true
        (= (mod n i) 0) false
        :else (test (+ i 1)))) 2))
-
+(let [primes (->> (range) (drop 1) (filter prime?))]
+  (nth primes 10001))
 

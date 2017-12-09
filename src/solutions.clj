@@ -26,3 +26,17 @@
        (filter even?)
        (reduce +)))
 
+;; Problem(7): What is the 1001st prime number?
+;; Answer:
+;; Explanation:
+;;  1) we define the `prime? [n]` function which is implemented with an inner recursive function that checks
+;;     the divisibility of `n` by the numbers 2 through the square root of n
+(use '[clojure.math.numeric-tower])
+(defn prime? [n]
+  ((fn test [i]
+     (cond
+       (> i (sqrt n)) true
+       (= (mod n i) 0) false
+       :else (test (+ i 1)))) 2))
+
+

@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Clojure-1.8.0" level="project" />
+    <orderEntry type="library" name="org.clojure:math.numeric-tower:0.0.4" level="project" />
   </component>
 </module>
